@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Apr 2024 pada 07.23
+-- Waktu pembuatan: 14 Apr 2024 pada 17.01
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 8.0.25
 
@@ -51,6 +51,16 @@ CREATE TABLE `tb_bukti` (
   `id_reservasi` int(11) NOT NULL,
   `foto` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `tb_bukti`
+--
+
+INSERT INTO `tb_bukti` (`id_bukti`, `id_reservasi`, `foto`) VALUES
+(10, 32, '2.png'),
+(11, 33, 'Screenshot (3).png'),
+(12, 34, 'Screenshot (7).png'),
+(13, 45, 'Screenshot (3).png');
 
 -- --------------------------------------------------------
 
@@ -116,7 +126,11 @@ CREATE TABLE `tb_reservasi` (
   `total` varchar(50) NOT NULL,
   `metode_pembayaran` enum('cash','transfer') NOT NULL,
   `konfirmasi` enum('belum_konfirmasi','konfirmasi') NOT NULL DEFAULT 'belum_konfirmasi',
-  `ex_cetak` enum('tidak','ya') NOT NULL
+  `extra_orang` int(50) NOT NULL,
+  `extra_waktu` int(50) NOT NULL,
+  `ex_cetak` varchar(50) NOT NULL,
+  `payment` text NOT NULL,
+  `lunas` enum('belum_lunas','lunas') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -244,7 +258,7 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT untuk tabel `tb_bukti`
 --
 ALTER TABLE `tb_bukti`
-  MODIFY `id_bukti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_bukti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_frame`
@@ -262,7 +276,7 @@ ALTER TABLE `tb_paket`
 -- AUTO_INCREMENT untuk tabel `tb_reservasi`
 --
 ALTER TABLE `tb_reservasi`
-  MODIFY `id_reservasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_reservasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_sebox`
