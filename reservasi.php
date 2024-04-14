@@ -39,9 +39,9 @@ if (isset($_POST['submit'])) {
     $tanggal = $_POST['tanggal'];
     $id_waktu_reservasi = $_POST['waktu'];
     $id_paket = $_POST['paket'];
-
     $extra_waktu = isset($_POST['extra_waktu']) ? intval($_POST['extra_waktu']) : 0;
-    $harga_extra_waktu = 0;
+    $extra_orang = isset($_POST['extra_orang']) ? intval($_POST['extra_orang']) : 0;
+
     switch ($extra_waktu) {
         case 5:
             $harga_extra_waktu = 15000;
@@ -65,34 +65,23 @@ if (isset($_POST['submit'])) {
     $rowHargaPaket = $resultHargaPaket->fetch_assoc();
     $harga_paket = $rowHargaPaket['harga'];
 
-    $extra_orang = isset($_POST['extra_orang']) ? intval($_POST['extra_orang']) : 0;
     $harga_extra_orang = $extra_orang * 25000;
+
+    $queryInsert = "INSERT INTO tb_reservasi (nama, email, tanggal, id_waktu_reservasi, id_paket, extra_waktu, extra_orang, total, konfirmasi, ex_cetak) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'belum_konfirmasi', '0')";
+    $stmt = $conn->prepare($queryInsert);
+    $stmt->bind_param("sssiiiii", $nama, $email, $tanggal, $id_waktu_reservasi, $id_paket, $extra_waktu, $extra_orang, $total_harga);
 
     $total_harga = $harga_paket + $harga_extra_waktu + $harga_extra_orang;
 
-    $queryCheck = "SELECT COUNT(*) AS total FROM tb_reservasi WHERE tanggal = ? AND id_waktu_reservasi = ?";
-    $stmtCheck = $conn->prepare($queryCheck);
-    $stmtCheck->bind_param("si", $tanggal, $id_waktu_reservasi);
-    $stmtCheck->execute();
-    $resultCheck = $stmtCheck->get_result();
-    $rowCheck = $resultCheck->fetch_assoc();
-
-    if ($rowCheck['total'] > 0) {
-        $keterangan =  "<p>Maaf, waktu tersebut sudah dipesan. Silakan pilih waktu yang lain.</p>";
+    if ($stmt->execute()) {
+        $_SESSION['id_reservasi'] = $stmt->insert_id;
+        echo '<script>window.location.href = "index.php?page=konfirmasi";</script>';
+        exit();
     } else {
-        $queryInsert = "INSERT INTO tb_reservasi (nama, email, tanggal, id_waktu_reservasi, id_paket, total, konfirmasi) VALUES (?, ?, ?, ?, ?, ?, 'belum_konfirmasi')";
-        $stmt = $conn->prepare($queryInsert);
-        $stmt->bind_param("sssiii", $nama, $email, $tanggal, $id_waktu_reservasi, $id_paket, $total_harga);
-
-        if ($stmt->execute()) {
-            $_SESSION['id_reservasi'] = $stmt->insert_id;
-            echo '<script>window.location.href = "index.php?page=konfirmasi";</script>';
-            exit();
-        } else {
-            echo "Error: " . $queryInsert . "<br>" . $conn->error;
-        }
+        echo "Error: " . $queryInsert . "<br>" . $conn->error;
     }
 }
+
 
 $conn->close();
 ?>
@@ -135,27 +124,25 @@ $conn->close();
             </div>
 
             <div class="form-group">
-                <label for="extra_orang">Extra Orang (Max: 10)</label>
-                <input type="range" class="form-control-range" id="extra_orang" name="extra_orang" min="0" max="10" step="1" value="0">
-                <span id="extra_orang_value">0</span>
-                <span>(+Rp <span id="extra_orang_harga">0</span>)</span>
+                <label>Extra Waktu:</label><br>
+                <select class="form-control" name="extra_waktu">
+                    <option value="0">Extra Waktu(+Rp 0)</option>
+                    <option value="5">Extra Waktu 5 Menit (+Rp 15.000)</option>
+                    <option value="10">Extra Waktu 10 Menit (+Rp 20.000)</option>
+                    <option value="15">Extra Waktu 15 Menit (+Rp 25.000)</option>
+                </select>
             </div>
 
-
             <div class="form-group">
-                <label>Extra Waktu:</label><br>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="extra_waktu" id="extra_waktu_5" value="5">
-                    <label class="form-check-label" for="extra_waktu_5">Extra Waktu 5 Menit (+Rp 15.000)</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="extra_waktu" id="extra_waktu_10" value="10">
-                    <label class="form-check-label" for="extra_waktu_10">Extra Waktu 10 Menit (+Rp 20.000)</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="extra_waktu" id="extra_waktu_15" value="15">
-                    <label class="form-check-label" for="extra_waktu_15">Extra Waktu 15 Menit (+Rp 25.000)</label>
-                </div>
+                <label for="extra_orang">Extra Orang (Max: 10)</label>
+                <select class="form-control" id="extra_orang" name="extra_orang">
+                    <?php 
+                    for ($i = 0; $i <= 10; $i++) {
+                        echo '<option value="' . $i . '">' . $i . '</option>';
+                    }
+                    ?>
+                </select>
+                <span>(+Rp <span id="extra_orang_harga">0</span>)</span>
             </div>
 
             <p style="margin-bottom: 8px; color: red; font-size: 13px;"><?php echo $keterangan; ?></p>
@@ -165,14 +152,13 @@ $conn->close();
 </div>
 
 <script>
-    var extraOrangInput = document.getElementById("extra_orang");
-    var extraOrangValue = document.getElementById("extra_orang_value");
+    document.getElementById("extra_orang").addEventListener("change", function () {
     var extraOrangHarga = document.getElementById("extra_orang_harga");
+    var hargaPerOrang = 25000;
+    var extraOrangValue = parseInt(this.value);
+    extraOrangHarga.textContent = extraOrangValue * hargaPerOrang; 
+});
 
-    extraOrangInput.addEventListener("input", function () {
-        extraOrangValue.textContent = extraOrangInput.value;
-        extraOrangHarga.textContent = extraOrangInput.value * 25000; 
-    });
 
     document.getElementById("paket").addEventListener("change", function () {
         var selectedOption = this.options[this.selectedIndex];

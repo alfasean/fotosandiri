@@ -4,18 +4,22 @@ require_once "./../connections/connections.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_reservasi = $_GET['menu_upd'];
-    // Ambil data yang dikirimkan melalui form
     $nama = $_POST["nama"];
     $tanggal = $_POST["tanggal"];
     $id_waktu_reservasi = $_POST["id_waktu_reservasi"];
     $id_paket = $_POST["id_paket"];
     $konfirmasi = $_POST["konfirmasi"];
     $ex_cetak = $_POST["ex_cetak"];
+    $lunas = $_POST["lunas"];
 
-    // Buat query untuk update data reservasi
-    $sql = "UPDATE tb_reservasi SET nama='$nama', tanggal='$tanggal', id_waktu_reservasi=$id_waktu_reservasi, id_paket=$id_paket, konfirmasi='$konfirmasi', ex_cetak = '$ex_cetak' WHERE id_reservasi=$id_reservasi";
+    $foto_name = $_FILES['payment']['name'];
+    $foto_tmp = $_FILES['payment']['tmp_name'];
+    $foto_destination = 'uploads/payment/' . $foto_name;
 
-    // Eksekusi query
+    move_uploaded_file($foto_tmp, $foto_destination);
+
+    $sql = "UPDATE tb_reservasi SET nama='$nama', tanggal='$tanggal', id_waktu_reservasi='$id_waktu_reservasi', id_paket='$id_paket', konfirmasi='$konfirmasi', ex_cetak='$ex_cetak', lunas='$lunas', payment='$foto_name' WHERE id_reservasi=$id_reservasi";
+
     if ($conn->query($sql) === TRUE) {
         echo '<script>window.location.href = "admin.php?page=reservasi";</script>';
         exit();
@@ -24,15 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Periksa apakah parameter menu_upd tersedia dalam URL
 if (isset($_GET['menu_upd'])) {
     $id_reservasi = $_GET['menu_upd'];
 
-    // Buat query untuk mengambil data reservasi yang akan diedit
     $query = "SELECT * FROM tb_reservasi WHERE id_reservasi=$id_reservasi";
     $result = $conn->query($query);
 
-    // Periksa apakah data reservasi ditemukan
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
     } else {
@@ -59,7 +60,7 @@ if (isset($_GET['menu_upd'])) {
     <div class="container">
         <div class="form-container mt-5">
             <h2>Edit Reservasi</h2>
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="nama">Nama:</label>
                     <input type="text" class="form-control" name="nama" value="<?php echo $row['nama']; ?>" required>
@@ -68,7 +69,6 @@ if (isset($_GET['menu_upd'])) {
                     <label for="tanggal">Tanggal:</label>
                     <input type="date" class="form-control" name="tanggal" value="<?php echo $row['tanggal']; ?>" required>
                 </div>
-                <!-- Menampilkan opsi waktu dari tabel tb_waktu_reservasi -->
                 <div class="form-group">
                     <label for="id_waktu_reservasi">Waktu:</label>
                     <select class="form-control" name="id_waktu_reservasi" required>
@@ -77,7 +77,6 @@ if (isset($_GET['menu_upd'])) {
                         $result_waktu = $conn->query($query_waktu);
                         if ($result_waktu->num_rows > 0) {
                             while ($row_waktu = $result_waktu->fetch_assoc()) {
-                                // Menandai waktu yang dipilih
                                 $selected = ($row_waktu['id_waktu_reservasi'] == $row['id_waktu_reservasi']) ? 'selected' : '';
                                 echo '<option value="' . $row_waktu['id_waktu_reservasi'] . '" ' . $selected . '>' . $row_waktu['start_time'] . ' - ' . $row_waktu['end_time'] . '</option>';
                             }
@@ -85,7 +84,6 @@ if (isset($_GET['menu_upd'])) {
                         ?>
                     </select>
                 </div>
-                <!-- Menampilkan opsi paket dari tabel tb_paket -->
                 <div class="form-group">
                     <label for="id_paket">Paket:</label>
                     <select class="form-control" name="id_paket" required>
@@ -94,7 +92,6 @@ if (isset($_GET['menu_upd'])) {
                         $result_paket = $conn->query($query_paket);
                         if ($result_paket->num_rows > 0) {
                             while ($row_paket = $result_paket->fetch_assoc()) {
-                                // Menandai paket yang dipilih
                                 $selected = ($row_paket['id_paket'] == $row['id_paket']) ? 'selected' : '';
                                 echo '<option value="' . $row_paket['id_paket'] . '" ' . $selected . '>' . $row_paket['nama_paket'] . '</option>';
                             }
@@ -112,9 +109,24 @@ if (isset($_GET['menu_upd'])) {
                 <div class="form-group">
                     <label for="ex_cetak">Extra Cetak:</label>
                     <select class="form-control" name="ex_cetak" required>
-                        <option value="Tidak" <?php if($row['tidak'] == 'tidak') echo 'selected'; ?>>Tidak</option>
-                        <option value="Ya" <?php if($row['ya'] == 'ya') echo 'selected'; ?>>Ya</option>
+                        <?php
+                        for ($i = 1; $i <= 10; $i++) {
+                            $selected = ($i == $row['ex_cetak']) ? 'selected' : '';
+                            echo '<option value="' . $i . '" ' . $selected . '>' . $i . '</option>';
+                        }
+                        ?>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="lunas">Lunas:</label>
+                    <select class="form-control" name="lunas" required>
+                        <option value="lunas" <?php if($row['lunas'] == 'lunas') echo 'selected'; ?>>Lunas</option>
+                        <option value="belum_lunas" <?php if($row['lunas'] == 'belum_lunas') echo 'selected'; ?>>Belum Lunas</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="payment">Foto Payment:</label>
+                    <input type="file" class="form-control-file" name="payment" accept="image/*" required>
                 </div>
                 <button type="submit" name="submit" class="btn btn-success">Simpan</button>
             </form>

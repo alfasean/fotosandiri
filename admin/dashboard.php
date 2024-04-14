@@ -5,7 +5,6 @@ if (!$conn) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }
 
-// Query untuk menghitung total reservasi
 $queryTotalReservasi = "SELECT COUNT(*) as total_reservasi FROM tb_reservasi";
 $resultTotalReservasi = $conn->query($queryTotalReservasi);
 
@@ -16,7 +15,6 @@ if ($resultTotalReservasi->num_rows > 0) {
     $totalReservasi = 0;
 }
 
-// Query untuk menghitung total frame
 $queryTotalFrame = "SELECT COUNT(*) as total_frame FROM tb_frame";
 $resultTotalFrame = $conn->query($queryTotalFrame);
 
@@ -27,7 +25,6 @@ if ($resultTotalFrame->num_rows > 0) {
     $totalFrame = 0;
 }
 
-// Query untuk menghitung total paket
 $queryTotalPaket = "SELECT COUNT(*) as total_paket FROM tb_paket";
 $resultTotalPaket = $conn->query($queryTotalPaket);
 

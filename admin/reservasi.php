@@ -36,6 +36,10 @@
                                         <th>Metode</th>
                                         <th>Status</th>
                                         <th>Extra Cetak</th>
+                                        <th>Extra Orang</th>
+                                        <th>Extra Waktu</th>
+                                        <th>Total Harga</th>
+                                        <th>Lunas</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -54,6 +58,10 @@
                                     <td>' . $row['metode_pembayaran'] . '</td>
                                     <td>' . $row['konfirmasi'] . '</td>
                                     <td>' . $row['ex_cetak'] . '</td>
+                                    <td>' . $row['extra_orang'] . '</td>
+                                    <td>' . $row['extra_waktu'] . '</td>
+                                    <td>' . $row['total'] . '</td>
+                                    <td>' . $row['lunas'] . '</td>
                                     <td>
                                         <a style="color: #F2BE22;" href="admin.php?page=edit_reservasi&menu_upd=' . $row['id_reservasi'] . '"" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                         <a style="color: #CD1818;" href="deleteReservasi.php?menu_del='. $row['id_reservasi'] . '" class="delete"><i class="material-icons" data-toggle="tooltip" title="Hapus">&#xE872;</i></a>

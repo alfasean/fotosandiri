@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 }
 
 $id_reservasi = $_SESSION['id_reservasi'];
-$query_info = "SELECT r.nama, r.tanggal, w.start_time, w.end_time, p.nama_paket, p.harga, p.kategori, r.total
+$query_info = "SELECT r.nama, r.tanggal, w.start_time, w.end_time, p.nama_paket, p.harga, p.kategori, r.total, r.extra_waktu, r.extra_orang
                FROM tb_reservasi r
                JOIN tb_waktu_reservasi w ON r.id_waktu_reservasi = w.id_waktu_reservasi
                JOIN tb_paket p ON r.id_paket = p.id_paket
@@ -72,6 +72,16 @@ $conn->close();
                 <div class="form-group">
                     <label for="dp">Harga Paket:</label>
                     <input type="text" class="form-control" id="dp" value="<?php echo $row_info['harga']; ?>" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="extra_orang">Extra Orang:</label>
+                    <input type="text" class="form-control" id="extra_orang" value="<?php echo $row_info['extra_orang']; ?> Orang" readonly>
+                </div>
+
+                <div class="form-group">
+                    <label for="extra_waktu">Extra Waktu:</label>
+                    <input type="text" class="form-control" id="extra_waktu" value="<?php echo $row_info['extra_waktu']; ?> Menit" readonly>
                 </div>
 
                 <div class="form-group">

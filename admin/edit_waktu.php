@@ -4,14 +4,11 @@ require_once "./../connections/connections.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_waktu_reservasi = $_GET['menu_upd'];
-    // Ambil data yang dikirimkan melalui form
     $start_time = $_POST["start_time"];
     $end_time = $_POST["end_time"];
 
-    // Buat query untuk update data waktu reservasi
     $sql = "UPDATE tb_waktu_reservasi SET start_time='$start_time', end_time='$end_time' WHERE id_waktu_reservasi=$id_waktu_reservasi";
 
-    // Eksekusi query
     if ($conn->query($sql) === TRUE) {
         echo '<script>window.location.href = "admin.php?page=waktu";</script>';
         exit();
@@ -20,15 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Periksa apakah parameter menu_upd tersedia dalam URL
 if (isset($_GET['menu_upd'])) {
     $id_waktu_reservasi = $_GET['menu_upd'];
 
-    // Buat query untuk mengambil data waktu yang akan diedit
     $query = "SELECT * FROM tb_waktu_reservasi WHERE id_waktu_reservasi=$id_waktu_reservasi";
     $result = $conn->query($query);
 
-    // Periksa apakah data waktu ditemukan
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
     } else {

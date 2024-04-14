@@ -55,8 +55,20 @@ $conn->close();
                         <td><?php echo $row['nama_paket']; ?></td>
                     </tr>
                     <tr>
-                        <th scope="row">Harga</th>
-                        <td><?php echo $row['harga']; ?></td>
+                        <th scope="row">Harga Paket</th>
+                        <td>Rp<?php echo $row['harga']; ?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Harga Paket</th>
+                        <td><?php echo $row['extra_orang']; ?> Orang</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Harga Paket</th>
+                        <td><?php echo $row['extra_waktu']; ?> Menit</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Total</th>
+                        <td>Rp<?php echo $row['total']; ?></td>
                     </tr>
                     <tr>
                         <th scope="row">Status</th>

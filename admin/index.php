@@ -114,7 +114,6 @@ if (isset($_POST['tb_admin'])) {
             margin-bottom: 20px;
         }
 
-        /* Responsiveness */
         @media (min-width: 576px) {
             .card {
                 max-width: 400px;
