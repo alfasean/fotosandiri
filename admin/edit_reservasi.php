@@ -10,6 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_paket = $_POST["id_paket"];
     $konfirmasi = $_POST["konfirmasi"];
     $ex_cetak = $_POST["ex_cetak"];
+    $extra_orang = $_POST["extra_orang"];
+    $extra_waktu = $_POST["extra_waktu"];
     $lunas = $_POST["lunas"];
 
     $foto_name = $_FILES['payment']['name'];
@@ -18,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     move_uploaded_file($foto_tmp, $foto_destination);
 
-    $sql = "UPDATE tb_reservasi SET nama='$nama', tanggal='$tanggal', id_waktu_reservasi='$id_waktu_reservasi', id_paket='$id_paket', konfirmasi='$konfirmasi', ex_cetak='$ex_cetak', lunas='$lunas', payment='$foto_name' WHERE id_reservasi=$id_reservasi";
+    $sql = "UPDATE tb_reservasi SET nama='$nama', tanggal='$tanggal', id_waktu_reservasi='$id_waktu_reservasi', id_paket='$id_paket', konfirmasi='$konfirmasi', ex_cetak='$ex_cetak', extra_waktu='$extra_waktu', extra_orang= '$extra_orang',lunas='$lunas', payment='$foto_name' WHERE id_reservasi=$id_reservasi";
 
     if ($conn->query($sql) === TRUE) {
         echo '<script>window.location.href = "admin.php?page=reservasi";</script>';
@@ -107,6 +109,14 @@ if (isset($_GET['menu_upd'])) {
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="extra_orang">Extra Orang:</label>
+                    <input type="text" class="form-control" name="extra_orang" value="<?php echo $row['extra_orang']; ?>" required>
+                </div>
+                <div class="form-group">
+                    <label for="extra_waktu">Extra Waktu:</label>
+                    <input type="text" class="form-control" name="extra_waktu" value="<?php echo $row['extra_waktu']; ?>" required>
+                </div>
+                <div class="form-group">
                     <label for="ex_cetak">Extra Cetak:</label>
                     <select class="form-control" name="ex_cetak" required>
                         <?php
@@ -126,7 +136,7 @@ if (isset($_GET['menu_upd'])) {
                 </div>
                 <div class="form-group">
                     <label for="payment">Foto Payment:</label>
-                    <input type="file" class="form-control-file" name="payment" accept="image/*" required>
+                    <input type="file" class="form-control-file" name="payment" accept="image/*">
                 </div>
                 <button type="submit" name="submit" class="btn btn-success">Simpan</button>
             </form>

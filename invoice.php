@@ -19,6 +19,8 @@ $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
+$status_reservasi = $row['konfirmasi'];
+
 $conn->close();
 ?>
 
@@ -59,11 +61,11 @@ $conn->close();
                         <td>Rp<?php echo $row['harga']; ?></td>
                     </tr>
                     <tr>
-                        <th scope="row">Harga Paket</th>
+                        <th scope="row">Extra Orang</th>
                         <td><?php echo $row['extra_orang']; ?> Orang</td>
                     </tr>
                     <tr>
-                        <th scope="row">Harga Paket</th>
+                        <th scope="row">Extra Waktu</th>
                         <td><?php echo $row['extra_waktu']; ?> Menit</td>
                     </tr>
                     <tr>
@@ -78,6 +80,9 @@ $conn->close();
             </table>
             <p style="font-size: 13px">Note : Tunggu status pesananmu di reservasi admin dulu yah. <br> Jika sudah di konfirmasi kamu bisa screenshoot halaman ini dan tunjukkan ke karyawan kami saat datang. <br> Untuk yang ingin mengganti jam harap memberi kabar ke admin 2 jam sebelum jam yang sudah di booking, Jika lewat dari itu maka sudah tidak bisa diubah lagi. <br> Kami memberikan waktu 5 menit untuk costumer yang terlambat . Mohon tepat waktu agar reservasinya (DP) tidak hangus.</p>
             <a href="index.php?page=home" class="btn btn-primary">Kembali ke Halaman Utama</a>
+            <?php if ($status_reservasi !== "cancel"): ?>
+            <a href="cancel_confirmation.php?id=<?php echo $id_reservasi; ?>" class="btn btn-danger">Cancel Reservasi</a>
+            <?php endif; ?>
         </div>
     </div>
 </div>

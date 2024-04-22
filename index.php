@@ -109,6 +109,9 @@ if (isset($_SESSION['id_reservasi'])) {
          case "selfphoto";
     		include 'selfphoto.php';
     		break;
+         case "cancel_confirmation";
+    		include 'cancel_confirmation.php';
+    		break;
     	}
     	?>
     

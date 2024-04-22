@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Apr 2024 pada 17.01
+-- Waktu pembuatan: 22 Apr 2024 pada 14.02
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 8.0.25
 
@@ -60,7 +60,12 @@ INSERT INTO `tb_bukti` (`id_bukti`, `id_reservasi`, `foto`) VALUES
 (10, 32, '2.png'),
 (11, 33, 'Screenshot (3).png'),
 (12, 34, 'Screenshot (7).png'),
-(13, 45, 'Screenshot (3).png');
+(13, 45, 'Screenshot (3).png'),
+(14, 46, 'amoxcilim.png'),
+(15, 47, 'face_esa.png'),
+(16, 48, 'Screenshot 2024-01-31 010914.png'),
+(17, 49, 'pasar-umum-negara-jembrana_169.jpeg'),
+(18, 50, 'ilustrasi-telur-ayam-_190508105911-684.jpg');
 
 -- --------------------------------------------------------
 
@@ -125,12 +130,32 @@ CREATE TABLE `tb_reservasi` (
   `tanggal` date NOT NULL,
   `total` varchar(50) NOT NULL,
   `metode_pembayaran` enum('cash','transfer') NOT NULL,
-  `konfirmasi` enum('belum_konfirmasi','konfirmasi') NOT NULL DEFAULT 'belum_konfirmasi',
+  `konfirmasi` enum('belum_konfirmasi','konfirmasi','cancel') NOT NULL DEFAULT 'belum_konfirmasi',
   `extra_orang` int(50) NOT NULL,
   `extra_waktu` int(50) NOT NULL,
   `ex_cetak` varchar(50) NOT NULL,
   `payment` text NOT NULL,
   `lunas` enum('belum_lunas','lunas') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `tb_reservasi`
+--
+
+INSERT INTO `tb_reservasi` (`id_reservasi`, `id_paket`, `id_waktu_reservasi`, `nama`, `email`, `tanggal`, `total`, `metode_pembayaran`, `konfirmasi`, `extra_orang`, `extra_waktu`, `ex_cetak`, `payment`, `lunas`) VALUES
+(50, 11, 2, 'alfa', 'alfasean22@gmail.com', '2024-04-23', '115000', 'cash', 'belum_konfirmasi', 2, 5, '0', '', 'belum_lunas');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_return`
+--
+
+CREATE TABLE `tb_return` (
+  `id_return` int(11) NOT NULL,
+  `id_reservasi` int(11) NOT NULL,
+  `bank` varchar(255) NOT NULL,
+  `no_rekening` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -227,6 +252,12 @@ ALTER TABLE `tb_reservasi`
   ADD PRIMARY KEY (`id_reservasi`);
 
 --
+-- Indeks untuk tabel `tb_return`
+--
+ALTER TABLE `tb_return`
+  ADD PRIMARY KEY (`id_return`);
+
+--
 -- Indeks untuk tabel `tb_sebox`
 --
 ALTER TABLE `tb_sebox`
@@ -258,7 +289,7 @@ ALTER TABLE `tb_admin`
 -- AUTO_INCREMENT untuk tabel `tb_bukti`
 --
 ALTER TABLE `tb_bukti`
-  MODIFY `id_bukti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_bukti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_frame`
@@ -276,7 +307,13 @@ ALTER TABLE `tb_paket`
 -- AUTO_INCREMENT untuk tabel `tb_reservasi`
 --
 ALTER TABLE `tb_reservasi`
-  MODIFY `id_reservasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id_reservasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_return`
+--
+ALTER TABLE `tb_return`
+  MODIFY `id_return` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_sebox`
