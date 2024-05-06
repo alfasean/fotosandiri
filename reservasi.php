@@ -6,19 +6,6 @@ if (!$conn) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }
 
-$queryWaktu = "SELECT * FROM tb_waktu_reservasi WHERE available = 1";
-$resultWaktu = mysqli_query($conn, $queryWaktu);
-
-$waktuOptions = "";
-
-if (mysqli_num_rows($resultWaktu) > 0) {
-    while ($rowWaktu = mysqli_fetch_assoc($resultWaktu)) {
-        $waktuOptions .= '<option value="' . $rowWaktu['id_waktu_reservasi'] . '">' . $rowWaktu['start_time'] . ' - ' . $rowWaktu['end_time'] . '</option>';
-    }
-} else {
-    $waktuOptions = '<option value="">Tidak ada waktu reservasi yang tersedia</option>';
-}
-
 $queryPaket = "SELECT * FROM tb_paket";
 $resultPaket = mysqli_query($conn, $queryPaket);
 
@@ -57,6 +44,7 @@ if (isset($_POST['submit'])) {
             break;
     }
 
+
     $queryHargaPaket = "SELECT harga FROM tb_paket WHERE id_paket = ?";
     $stmtHargaPaket = $conn->prepare($queryHargaPaket);
     $stmtHargaPaket->bind_param("i", $id_paket);
@@ -81,7 +69,6 @@ if (isset($_POST['submit'])) {
         echo "Error: " . $queryInsert . "<br>" . $conn->error;
     }
 }
-
 
 $conn->close();
 ?>
@@ -113,13 +100,12 @@ $conn->close();
 
             <div class="form-group">
                 <label for="tanggal">Tanggal Reservasi</label>
-                <input type="date" class="form-control" name="tanggal" required>
+                <input type="date" class="form-control" name="tanggal" id="tanggal" required>
             </div>
 
             <div class="form-group">
                 <label for="waktu">Waktu Reservasi</label>
-                <select class="form-control" name="waktu" required>
-                    <?php echo $waktuOptions; ?>
+                <select class="form-control" name="waktu" id="waktu" required>
                 </select>
             </div>
 
@@ -152,13 +138,33 @@ $conn->close();
 </div>
 
 <script>
-    document.getElementById("extra_orang").addEventListener("change", function () {
-    var extraOrangHarga = document.getElementById("extra_orang_harga");
-    var hargaPerOrang = 25000;
-    var extraOrangValue = parseInt(this.value);
-    extraOrangHarga.textContent = extraOrangValue * hargaPerOrang; 
-});
+    document.addEventListener("DOMContentLoaded", function () {
+        var tanggalInput = document.getElementById('tanggal');
+        var waktuSelect = document.getElementById('waktu');
 
+        tanggalInput.addEventListener("change", function () {
+            var selectedDate = this.value;
+            fetch('get_available_times.php?tanggal=' + selectedDate)
+                .then(response => response.json())
+                .then(data => {
+                    waktuSelect.innerHTML = '';
+                    data.forEach(waktu => {
+                        var option = document.createElement('option');
+                        option.value = waktu.id_waktu_reservasi;
+                        option.textContent = waktu.start_time + ' - ' + waktu.end_time;
+                        waktuSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    });
+
+    document.getElementById("extra_orang").addEventListener("change", function () {
+        var extraOrangHarga = document.getElementById("extra_orang_harga");
+        var hargaPerOrang = 25000;
+        var extraOrangValue = parseInt(this.value);
+        extraOrangHarga.textContent = extraOrangValue * hargaPerOrang;
+    });
 
     document.getElementById("paket").addEventListener("change", function () {
         var selectedOption = this.options[this.selectedIndex];

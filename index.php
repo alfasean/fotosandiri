@@ -29,12 +29,26 @@ if (isset($_SESSION['id_reservasi'])) {
       <meta name="description" content="">
       <meta name="author" content="">
       <link rel="stylesheet" href="css/bootstrap.min.css">
-      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/style.css?v=2">
       <link rel="stylesheet" href="css/responsive.css">
+      <script src="https://kit.fontawesome.com/8353bdf612.js" crossorigin="anonymous"></script>
       <link rel="icon" href="images/logo.png" type="image/gif" />
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
       <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
    </head>
+
+   <style>
+      .icon-link {
+    margin-right: 15px;
+}
+
+.icon-link i {
+    font-size: 3em;
+}
+
+   </style>
+
    <body class="main-layout">
       <div class="loader_bg">
          <div class="loader"><img src="images/loading.gif" alt="#"/></div>
@@ -114,23 +128,47 @@ if (isset($_SESSION['id_reservasi'])) {
     		break;
     	}
     	?>
-    
-    <footer>
-      <div class="footer">
-         <div class="copyright">
-               <div class="container">
-                  <div class="row align-items-center"> 
-                     <div class="col-md-6">
-                           <iframe width="500" height="250" class="mt-4" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3110.8070625350574!2d124.84409507363596!3d1.483784661133488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x328775e899005551%3A0xb955666574c0bd16!2sSoondays%20coffee!5e1!3m2!1sid!2sid!4v1712486606084!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                     </div>
-                     <div class="col-md-6">
-                           <p class="py-5 text-center">© 2024 All Rights Reserved. Design by Fotosandiri.studio</p>
-                     </div>
-                  </div>
-               </div>
-         </div>
+
+
+<footer style="margin-top: 150px !important;">
+  <div class="row" style="background-color: #FFC0CB;">
+    <div class="col-lg text-white">
+      <div class="p-5">
+        <h2 class="h1 text-uppercase font-weight-bold mb-4">Fotosandiri.studio</h2>
+        <p class="lead mb-4">Self Photo Studio & Photobox Pertama di Manado</p>
+        <address>
+         <p class="mb-3">Contact Us:</p>
+          <ul class="list-unstyled mb-0">
+            <li class="d-flex align-items-center mb-3">
+              <i class="fas fa-map-marker-alt fa-lg mr-2 text-white"></i>
+              <span><span class="text-white">Jl. Tikala Ares No.108, Tikala Ares, Kec. Tikala, Kota Manado</span></span>
+            </li>
+            <li class="d-flex align-items-center mb-3">
+            <i class="fa-brands fa-whatsapp fa-lg  mr-2 text-white"></i>
+              <span><span class="text-white">+6285399581627</span></span>
+            </li>
+            <li class="d-flex align-items-center mb-3">
+            <i class="fa-brands fa-instagram fa-lg  mr-2 text-white"></i>
+              <span><a class="text-white" href="https://www.instagram.com/fotosandiri.studio/">fotosandiri.studio</a></span>
+            </li>
+            <li class="d-flex align-items-center">
+               <i class="fa-brands fa-tiktok fa-lg  mr-2 text-white"></i>
+               <span><a class="text-white" href="https://www.tiktok.com/@fotosandiri.studio">fotosandiri.studio</a></span>
+            </li>
+          </ul>
+        </address>
       </div>
-   </footer>
+    </div>
+
+    <div class="col-lg" style="min-height: 400px;">
+      <div class="h-100 d-flex justify-content-center align-items-center">
+         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3110.8070625350574!2d124.84409507363596!3d1.483784661133488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x328775e899005551%3A0xb955666574c0bd16!2sSoondays%20coffee!5e1!3m2!1sid!2sid!4v1712486606084!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
 
       <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
       <script>

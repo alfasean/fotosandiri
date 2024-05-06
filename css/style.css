@@ -241,7 +241,7 @@ button {
      content: "";
      width: 0px;
      height: 1px;
-     border: #0000FF solid 1px;
+     border: #FFC0CB solid 1px;
      transition: all 0.2s linear;
      display: block;
      margin-bottom: -16px;
@@ -259,7 +259,7 @@ button {
 }
 
 .read_more:hover {
-     color: #0000FF;
+     color: #FFC0CB;
      transition: ease-in all 0.5s;
 }
 
@@ -341,7 +341,7 @@ z-index: 999;
 .navigation.navbar-dark .navbar-nav .nav-link:focus,
 .navigation.navbar-dark .navbar-nav .nav-link:hover {
      color: #fff;
-     background: #0000FF;
+     background: #FFC0CB;
 }
 
 .navigation.navbar-dark .navbar-nav .active>.nav-link,
@@ -349,7 +349,7 @@ z-index: 999;
 .navigation.navbar-dark .navbar-nav .nav-link.show,
 .navigation.navbar-dark .navbar-nav .show>.nav-link {
      color: #fff;
-     background: #0000FF;
+     background: #FFC0CB;
 }
 
 .di_no {
@@ -450,7 +450,7 @@ ul.email li i {
 #carouselExampleIndicators .carousel-control-next {
      width: 66px;
      height: 66px;
-     background-color: #3e0bce;
+     background-color: #FFC0CB;
      color: #fff;
      font-size: 15px;
      opacity: 1;
@@ -471,7 +471,7 @@ ul.email li i {
 #carouselExampleIndicators .carousel-control-next:hover,
 #carouselExampleIndicators .carousel-control-prev:focus,
 #carouselExampleIndicators .carousel-control-prev:hover {
-     background-color: #0000FF;
+     background-color: #FFC0CB;
      color: #fff;
 }
 
@@ -501,7 +501,7 @@ ul.email li i {
 
 .class_paket {
      border-radius: 10px;
-     background: #0000FF;
+     background: #FFC0CB;
      margin-bottom: 58px;
      transition: ease-in all 0.5s;
      padding: 10px 10px 10px 10px;
@@ -524,7 +524,7 @@ ul.email li i {
 }
 
 .blue {
-     background: #3e0bce;
+     background: #FFC0CB;
 }
 
 .margi_bottom {
@@ -538,7 +538,7 @@ ul.email li i {
 /** about section **/
 
 .about {
-     background: url(../images/about_bg.jpg);
+     /* background: url(../images/about_bg.jpg); */
      background-size: cover;
      background-position: center center;
      background-repeat: no-repeat;
@@ -569,19 +569,19 @@ ul.email li i {
      margin: 0;
 }
 
-.about_img figure img {
+.about_img {
      width: 100%;
-     margin-bottom: -11px;
+     margin-bottom: 70px !important;
 }
 
 .about .read_more {
      color: #fff;
-     background: #3e0bce;
+     background: #FFC0CB;
 }
 
 .about .read_more:hover {
-     color: #0000FF;
-     background: #3e0bce;
+     color: #FFC0CB;
+     background: #fdfdfd;
 }
 
 
@@ -592,7 +592,7 @@ ul.email li i {
 
 .frame_foto {
      background: #fff;
-     padding: 90px 30px 90px 30px;
+     padding: 290px 130px 290px 130px;
 }
 
 .frame_foto .titlepage p {
@@ -628,14 +628,14 @@ ul.email li i {
 }
 
 .border_left {
-     border-left: #0000FF solid 1px;
+     border-left: #FFC0CB solid 1px;
      padding-left: 40px;
 }
 
 .copyright {
      margin-top: 90px;
      padding-bottom: 25px;
-     background: #0000FF
+     background: #FFC0CB
 }
 
 .copyright p {
@@ -653,7 +653,7 @@ ul.email li i {
 }
 
 .copyright a:hover {
-     color: #3e0bce;
+     color: #FFC0CB;
 }
 
 

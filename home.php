@@ -1,6 +1,6 @@
 <style>
     .gallery {
-        background-color: #f2f2f2;
+        background-color: #ffffff;
         padding: 50px 0;
     }
 
@@ -37,7 +37,7 @@
     .btn-lihat-lebih-banyak {
         margin-top: 20px;
         padding: 10px 20px;
-        background-color: #0000FF;
+        background-color: #FFC0CB;
         color: white;
         border: none;
         border-radius: 5px;
@@ -48,6 +48,13 @@
         margin-top : 10px;
         transition :transform 0.8s ease;
     }
+
+    .color-box {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
 </style>
 
 
@@ -157,7 +164,7 @@
          </div>
       </div>
 
-      <div class="about" id="tentang">
+      <div class="about" id="tentang" style="background-color: #FFC0CB !important;">
          <div class="container-fluid">
             <div class="row d_flex">
                <div class="col-md-6">
@@ -170,7 +177,7 @@
                   </div>
                </div>
                <div class="col-md-6">
-                  <img src="images/people.png" alt="foto">
+                  <img class="about_img" src="images/about.jpg" alt="foto">
                </div>
             </div>
          </div>
@@ -246,5 +253,32 @@
         </div>
     </div>
 </div>
+<div class="bg_color py-5" style="background-color: #FFC0CB;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage text_align_center">
+                    <h2 class="text-white">Background Color</h2>
+                    <p class="text-white">Pilihan warna dari Fotosandiri.Studio</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="color-box" style="background-color: #FFFFFF;"></div>
+                <p class="text-white text-center">Putih</p>
+            </div>
+            <div class="col-md-4">
+                <div class="color-box" style="background-color: #808080;"></div>
+                <p class="text-white text-center">Abu-Abu</p>
+            </div>
+            <div class="col-md-4">
+                <div class="color-box" style="background-color: #DEB887;"></div>
+                <p class="text-white text-center">Coklat</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
