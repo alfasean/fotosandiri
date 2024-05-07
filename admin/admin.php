@@ -189,6 +189,9 @@ require_once "./../connections/connections.php";
     		case "edit_paket";
     			include 'edit_paket.php';
     		break;
+    		case "return";
+    			include 'return.php';
+    		break;
     	}
     	?>
         

@@ -56,7 +56,13 @@
                                     <td>' . $row['nama_paket'] . '</td>
                                     <td>' . $row['harga'] . '</td>
                                     <td>' . $row['metode_pembayaran'] . '</td>
-                                    <td>' . $row['konfirmasi'] . '</td>
+                                    <td>' . $row['konfirmasi'] . '
+                                        ';
+                                    if($row['konfirmasi'] == 'cancel') {
+                                        echo '<br><a href="admin.php?page=return&menu_upd=' . $row['id_reservasi'] . '">Lihat rekening</a>';
+                                    }
+                                    echo '
+                                    </td>
                                     <td>' . $row['ex_cetak'] . '</td>
                                     <td>' . $row['extra_orang'] . '</td>
                                     <td>' . $row['extra_waktu'] . '</td>
