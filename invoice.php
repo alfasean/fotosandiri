@@ -37,6 +37,7 @@ $conn->close();
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3" style="margin-top: 100px;">
+        <div class="cetak">
             <h2 class="text-center">Data Reservasi</h2>
             <table class="table table-bordered mt-5">
                 <tbody>
@@ -78,14 +79,28 @@ $conn->close();
                     </tr>
                 </tbody>
             </table>
+            </div>
             <p style="font-size: 13px">Note : Tunggu status pesananmu di reservasi admin dulu yah. <br> Jika sudah di konfirmasi kamu bisa screenshoot halaman ini dan tunjukkan ke karyawan kami saat datang. <br> Untuk yang ingin mengganti jam harap memberi kabar ke admin 2 jam sebelum jam yang sudah di booking, Jika lewat dari itu maka sudah tidak bisa diubah lagi. <br> Kami memberikan waktu 5 menit untuk costumer yang terlambat . Mohon tepat waktu agar reservasinya (DP) tidak hangus.</p>
             <a href="index.php?page=home" class="btn btn-primary">Kembali ke Halaman Utama</a>
             <?php if ($status_reservasi !== "cancel"): ?>
             <a href="cancel_confirmation.php?id=<?php echo $id_reservasi; ?>" class="btn btn-danger">Cancel Reservasi</a>
+            <!-- <button class="btn btn-primary btn-print" onclick="printData()">Cetak</button> -->
             <?php endif; ?>
         </div>
     </div>
 </div>
 
+<!-- <script>
+    function printData() {
+        var printContent = document.querySelector('.cetak').innerHTML;
+        var originalContent = document.body.innerHTML;
+
+        document.body.innerHTML = printContent;
+
+        window.print();
+
+        document.body.innerHTML = originalContent;
+    }
+</script> -->
 </body>
 </html>

@@ -55,6 +55,21 @@
     margin-bottom: 20px;
 }
 
+.sebox-item {
+        margin-bottom: 30px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        flex-direction: column;
+    }
+
+    .sebox-item img {
+        max-width: 250px; 
+        height: auto; 
+        border-radius: 20px;
+    }
+
 </style>
 
 
@@ -278,7 +293,31 @@
             </div>
         </div>
     </div>
+
+    <div class="bg_sebox py-2 mt-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage text_align_center">
+                    <h2 class="text-white">Background Sebox</h2>
+                    <p class="text-white">Pilihan background dari paket Sebox</p>
+                </div>
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="sebox-item mr-3">
+                <img src="images/sebox light.jpg" alt="backrgound-sebox">
+                <p class="text-white text-center mt-3" style="font-size: 24px; font-weight: bold;">S E B O X <br> L I G H T</p>
+            </div>
+            <div class="sebox-item">
+                <img src="images/sebox poster.jpg" alt="backrgound-sebox">
+                <p class="text-white text-center mt-3" style="font-size: 24px; font-weight: bold;">S E B O X <br> P O S T E R</p>
+            </div>
+        </div>
+    </div>
 </div>
+</div>
+
 
 
 

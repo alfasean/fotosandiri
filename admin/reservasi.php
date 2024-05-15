@@ -29,6 +29,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama</th>
+                                        <th>Email</th>
                                         <th>Tanggal</th>
                                         <th>Waktu</th>
                                         <th>Nama Paket</th>
@@ -51,6 +52,7 @@
                             echo '<tr>
                                     <td>' . $no . '</td>
                                     <td>' . $row['nama'] . '</td>
+                                    <td>' . $row['email'] . '</td>
                                     <td>' . $row['tanggal'] . '</td>
                                     <td>' . $row['start_time'] . ' - ' . $row['end_time'] . '</td>
                                     <td>' . $row['nama_paket'] . '</td>
